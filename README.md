@@ -4,10 +4,18 @@ I want to create the most polyglot twitch-chat bot out there.
 This will basically be my training ground for all languages and technologies.
 
 ## Planned Features
-- Use many languages and technologies
-- Use modern deployment (docker, kubernetes)
-- Use at least one relational and at least one no-sql database
 - Microservice architecture
+- Web-Interface:
+    - OAuth Login
+- Use many languages and technologies:
+    - at least one imperative language
+    - at least one functional langauge
+    - at least one relational database
+    - at least one no-sql database
+- Use modern deployment (docker, kubernetes)
+- Bot features:
+    - Plugin System (WASM or script engine)
+    - Point System
 
 ## Non-Features
 - I don't want to have every language technologie there is.
