@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hardliner66.github.io/polybot/sitemap.xml
