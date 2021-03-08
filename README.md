@@ -19,21 +19,8 @@ This will basically be my training ground for all languages and technologies.
 - Client:
     - sqlite
 
-## Database
-- Library:
-    - diesel (i intuitively prefer this one for use behind an API)
-        - not async
-        - orm
-    - sqlx
-        - async
-        - no orm
-        - type checked SQL
-- Database access is managed through an API server
-    - Services communicate with API, API communicates with DB
-- Communication:
-    - https://www.grpc.io/
-        - https://crates.io/crates/tonic
-    - graphql
+## Docs
+- [docs](docs/index.md)
 
 ## Non-Features
 - I don't want to have every language technologie there is.
