@@ -16,7 +16,7 @@ pub fn create_user<'a>(conn: &PgConnection, name: &'a str) -> User {
     use schema::users;
 
     let new_user = NewUser {
-        name,
+        name: &name.to_lowercase(),
     };
 
     diesel::insert_into(users::table)
