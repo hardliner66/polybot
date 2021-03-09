@@ -9,8 +9,16 @@ name = "server"
 path = "src/server.rs"
 
 [[bin]]
-name = "client"
-path = "src/client.rs"
+name = "get_points"
+path = "src/get_points.rs"
+
+[[bin]]
+name = "set_points"
+path = "src/set_points.rs"
+
+[[bin]]
+name = "add_points"
+path = "src/add_points.rs"
 
 [dependencies]
 diesel = { version = "1.4.0", features = ["postgres", "extras"] }

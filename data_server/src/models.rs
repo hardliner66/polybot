@@ -1,7 +1,7 @@
-use super::schema::{users, channel_points};
+use super::schema::{user_data, users};
 
 #[derive(Insertable)]
-#[table_name="users"]
+#[table_name = "users"]
 pub struct NewUser<'a> {
     pub name: &'a str,
 }
@@ -13,16 +13,16 @@ pub struct User {
 }
 
 #[derive(Insertable)]
-#[table_name="channel_points"]
-pub struct NewChannelPoints {
-    pub streamer_id: i32,
-    pub viewer_id: i32,
-}
-
-#[derive(Queryable)]
-pub struct ChannelPoints {
+#[table_name = "user_data"]
+pub struct NewUserData {
     pub streamer_id: i32,
     pub viewer_id: i32,
     pub points: i32,
 }
 
+#[derive(Queryable)]
+pub struct UserData {
+    pub streamer_id: i32,
+    pub viewer_id: i32,
+    pub points: i32,
+}

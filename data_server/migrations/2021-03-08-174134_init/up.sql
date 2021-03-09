@@ -5,15 +5,15 @@ CREATE TABLE users (
     UNIQUE(name)
 );
 
-CREATE TABLE channel_points (
+CREATE TABLE user_data (
     streamer_id INT,
     viewer_id INT,
-    points INT DEFAULT 0,
-    CONSTRAINT pk_channel_points PRIMARY KEY (streamer_id, viewer_id),
-    CONSTRAINT fk_channel_points_streamer_id
+    points INT DEFAULT 0 NOT NULL,
+    CONSTRAINT pk_user_data PRIMARY KEY (streamer_id, viewer_id),
+    CONSTRAINT fk_user_data_streamer_id
       FOREIGN KEY(streamer_id) 
 	    REFERENCES users(user_id),
-    CONSTRAINT fk_channel_points_viewer_id
+    CONSTRAINT fk_user_data_viewer_id
       FOREIGN KEY(viewer_id) 
 	    REFERENCES users(user_id)
 );

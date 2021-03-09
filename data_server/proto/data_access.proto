@@ -2,27 +2,9 @@ syntax = "proto3";
 package data_access;
 
 service Database {
-    rpc AddUser (AddUserRequest) returns (AddUserResponse);
-    rpc GetUser (GetUserRequest) returns (GetUserResponse);
-    /* rpc GetPoints (GetPointsRequest) returns (GetPointsResponse); */
-    /* rpc SetPoints (SetPointsRequest) returns (SetPointsResponse); */
-    /* rpc AddPoints (AddPointsRequest) returns (AddPointsResponse); */
-}
-
-message AddUserRequest {
-  string name = 1;
-}
-
-message AddUserResponse {
-  int32 id = 1;
-}
-
-message GetUserRequest {
-  string name = 1;
-}
-
-message GetUserResponse {
-  string name = 2;
+    rpc GetPoints (GetPointsRequest) returns (GetPointsResponse);
+    rpc SetPoints (SetPointsRequest) returns (SetPointsResponse);
+    rpc AddPoints (AddPointsRequest) returns (AddPointsResponse);
 }
 
 message GetPointsRequest {
