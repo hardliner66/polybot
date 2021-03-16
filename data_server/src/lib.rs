@@ -63,7 +63,7 @@ pub fn set_points(
     conn: &PgConnection,
     streamer: &User,
     viewer: &User,
-    new_points: i32,
+    new_points: i64,
 ) -> QueryResult<()> {
     use self::schema::user_data;
     use self::schema::user_data::dsl::*;
@@ -92,8 +92,8 @@ pub fn add_points(
     conn: &PgConnection,
     streamer: &User,
     viewer: &User,
-    additional_points: i32,
-) -> QueryResult<i32> {
+    additional_points: i64,
+) -> QueryResult<i64> {
     use self::schema::user_data;
     use self::schema::user_data::dsl::*;
     let data = conn.transaction::<_, _, _>(|| match get_user_data(conn, streamer, viewer) {

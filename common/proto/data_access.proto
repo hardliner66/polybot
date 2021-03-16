@@ -13,13 +13,13 @@ message GetPointsRequest {
 }
 
 message GetPointsResponse {
-  int32 points = 1;
+  int64 points = 1;
 }
 
 message SetPointsRequest {
   string streamer_name = 1;
   string viewer_name = 2;
-  int32 points = 3;
+  int64 points = 3;
 }
 
 message SetPointsResponse {}
@@ -27,9 +27,9 @@ message SetPointsResponse {}
 message AddPointsRequest {
   string streamer_name = 1;
   string viewer_name = 2;
-  int32 points = 3;
+  int64 points = 3;
 }
 
 message AddPointsResponse {
-  int32 points = 1;
+  int64 points = 1;
 }

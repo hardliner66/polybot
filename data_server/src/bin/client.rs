@@ -1,13 +1,6 @@
 use structopt::{StructOpt, clap::AppSettings};
 
-use database_server::database_client::DatabaseClient;
-use database_server::AddPointsRequest;
-use database_server::GetPointsRequest;
-use database_server::SetPointsRequest;
-
-pub mod database_server {
-    tonic::include_proto!("data_access");
-}
+use common::DataServerClient;
 
 #[derive(StructOpt)]
 #[structopt(global_setting = AppSettings::AllowNegativeNumbers)]
@@ -45,11 +38,11 @@ enum ChannelCommand {
 enum ViewerCommand {
     /// add the specified amount of points to a viewer
     AddPoints {
-        points: i32,
+        points: i64,
     },
     /// set the points of a viewer to the specified amount
     SetPoints {
-        points: i32,
+        points: i64,
     },
     /// get the points of a viewer (default if no command is specified)
     GetPoints,
@@ -58,43 +51,23 @@ enum ViewerCommand {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let Opt { server, command } = Opt::from_args();
-    let mut client = DatabaseClient::connect(server).await?;
+    let mut client = DataServerClient::new(server).await?;
 
     match command {
         Command::Channel { channel, command } => match command {
             ChannelCommand::Viewer { viewer, command } => {
                 match command.unwrap_or(ViewerCommand::GetPoints) {
                     ViewerCommand::SetPoints { points } => {
-                        let request = tonic::Request::new(SetPointsRequest {
-                            streamer_name: channel,
-                            viewer_name: viewer,
-                            points,
-                        });
-
-                        let response = client.set_points(request).await?;
-
-                        println!("RESPONSE={:#?}", response);
+                        client.set_points(channel, viewer, points).await?;
+                        println!("Succesfully set points!");
                     }
                     ViewerCommand::AddPoints { points } => {
-                        let request = tonic::Request::new(AddPointsRequest {
-                            streamer_name: channel,
-                            viewer_name: viewer,
-                            points,
-                        });
-
-                        let response = client.add_points(request).await?;
-
-                        println!("RESPONSE={:#?}", response);
+                        let new_points = client.add_points(channel.clone(), viewer.clone(), points).await?;
+                        println!("Viewer {} now has {} points in channel {}", viewer, new_points, channel);
                     }
                     ViewerCommand::GetPoints => {
-                        let request = tonic::Request::new(GetPointsRequest {
-                            streamer_name: channel,
-                            viewer_name: viewer,
-                        });
-
-                        let response = client.get_points(request).await?;
-
-                        println!("RESPONSE={:#?}", response);
+                        let new_points = client.get_points(channel.clone(), viewer.clone()).await?;
+                        println!("Viewer {} now has {} points in channel {}", viewer, new_points, channel);
                     }
                 }
             }

@@ -17,12 +17,12 @@ pub struct User {
 pub struct NewUserData {
     pub streamer_id: i32,
     pub viewer_id: i32,
-    pub points: i32,
+    pub points: i64,
 }
 
 #[derive(Queryable)]
 pub struct UserData {
     pub streamer_id: i32,
     pub viewer_id: i32,
-    pub points: i32,
+    pub points: i64,
 }

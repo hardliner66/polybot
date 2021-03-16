@@ -8,7 +8,8 @@ CREATE TABLE users (
 CREATE TABLE user_data (
     streamer_id INT,
     viewer_id INT,
-    points INT DEFAULT 0 NOT NULL,
+    points BIGINT DEFAULT 0 NOT NULL,
+    CHECK(points >= 0),
     CONSTRAINT pk_user_data PRIMARY KEY (streamer_id, viewer_id),
     CONSTRAINT fk_user_data_streamer_id
       FOREIGN KEY(streamer_id) 

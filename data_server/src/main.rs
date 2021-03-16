@@ -4,14 +4,10 @@ use diesel::r2d2::ConnectionManager;
 
 use data_server::models::{User, UserData};
 
-use database_server::database_server::{Database, DatabaseServer};
-use database_server::{
+use common::database::database_server::{Database, DatabaseServer};
+use common::database::{
     AddPointsRequest,
     AddPointsResponse,
-    // AddUserRequest,
-    // AddUserResponse,
-    // GetUserRequest,
-    // GetUserResponse,
     GetPointsRequest,
     GetPointsResponse,
     SetPointsRequest,
@@ -20,10 +16,6 @@ use database_server::{
 
 use diesel::pg::PgConnection;
 use diesel::r2d2;
-
-pub mod database_server {
-    tonic::include_proto!("data_access");
-}
 
 pub struct MyDatabase {
     pool: r2d2::Pool<ConnectionManager<PgConnection>>,
@@ -55,36 +47,6 @@ fn get_or_add_user_data(
 
 #[tonic::async_trait]
 impl Database for MyDatabase {
-    // async fn add_user(
-    //     &self,
-    //     request: Request<AddUserRequest>,
-    // ) -> Result<Response<AddUserResponse>, Status> {
-    //     let request = request.get_ref();
-
-    //     let client = self.pool.get().unwrap();
-    //     let user = data_server::create_user(&client, &request.name).expect("Could not create user!");
-
-    //     let reply = AddUserResponse {
-    //         id: user.id,
-    //     };
-
-    //     Ok(Response::new(reply))
-    // }
-
-    // async fn get_user(
-    //     &self,
-    //     request: Request<GetUserRequest>,
-    // ) -> Result<Response<GetUserResponse>, Status> {
-    //     let request = request.get_ref();
-
-    //     let client = self.pool.get().unwrap();
-    //     let user = data_server::get_user(&client, &request.name).expect("Could not find user!");
-
-    //     Ok(Response::new(GetUserResponse {
-    //         name: user.name,
-    //     }))
-    // }
-
     async fn get_points(
         &self,
         request: Request<GetPointsRequest>,
